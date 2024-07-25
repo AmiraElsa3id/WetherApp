@@ -11,6 +11,7 @@ const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Frida
 const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 let lastUserInput;
 let lastData;
+const apiKey = "f1e9f019feda40a19b2151318242507";
 
 getCurrentLocationWeather("cairo");
 
@@ -53,7 +54,7 @@ function getMonth(num) {
 }
 async function getCurrentLocationWeather(location) {
     try {
-        let response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=65ae574104cb47adb68194512242206&q=${location}&days=4`);
+        let response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${location}&days=4`);
         let data = await response.json();
         console.log(data);
         if(data==null){
@@ -68,9 +69,10 @@ async function getCurrentLocationWeather(location) {
             windDirection: data.current.wind_dir,
             humidity: data.current.humidity
         }
-        console.log(currentLocationData);
+        console.log(data.forecast.forecastday[1].date);
         tempData=[];
-        for (let i = 1; i < 4; i++) {
+
+        for (let i = 1; i < data.forecast.forecastday.length; i++) {
             tempData.push({
                 date: data.forecast.forecastday[i].date,
                 condition: data.forecast.forecastday[i].day.condition,
@@ -112,7 +114,7 @@ searchButton.addEventListener("click",function(){
 async function searchLocation(input) {
     try{
         let location = input.toLowerCase();
-        let response =await fetch(`https://api.weatherapi.com/v1//search.json?key=65ae574104cb47adb68194512242206&q=${location}`);
+        let response =await fetch(`https://api.weatherapi.com/v1//search.json?key=${apiKey}&q=${location}`);
         let data =await response.json();
         if(data!=null){
             let locationName=data[0].name;
@@ -157,9 +159,9 @@ function display(data) {
         </div>
     </div>
     `
-    
+    console.log(forecast)
     let tempBox =``;
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < forecast.length; i++) {
         tempBox += `
             <div class="text-center col-md-4 forcast-day">
             <div class="texr-center inner ">
