@@ -11,7 +11,7 @@ const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Frida
 const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 let lastUserInput;
 let lastData;
-const apiKey = "f1e9f019feda40a19b2151318242507";
+const apiKey = "004b437fca1c4642b8b105322241312";
 
 getCurrentLocationWeather("cairo");
 
